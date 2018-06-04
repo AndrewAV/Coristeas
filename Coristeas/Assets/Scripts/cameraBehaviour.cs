@@ -40,8 +40,14 @@ public class cameraBehaviour : MonoBehaviour
             {
                 retornar = false;
                 roca.transform.position = posicionInicialRoca;
+                roca.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                roca.GetComponent<rock>().reestableserSpring();
             }
-
         }
+    }
+
+    public void pene()
+    {
+
     }
 }

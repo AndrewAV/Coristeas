@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: bdbb8370e5fdfe749b0147996c16fdea
-timeCreated: 1524291644
+timeCreated: 1528099758
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: largeStone1
+    21300002: shortStone1
+    21300004: tringleStone1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -88,6 +90,32 @@ TextureImporter:
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: shortStone1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 105
+        width: 82
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tringleStone1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 301
+        width: 80
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
