@@ -35,14 +35,23 @@ public class rock : NetworkBehaviour {
     [SerializeField] GameObject castle;
 
 
+    string _ID;
+
+
     private void Start()
     {
+        _ID = "Player " + GetComponent<NetworkIdentity>().netId;
+        transform.name = _ID;
+
+
         //Si el jugador no es local destruir este codigo.
         if (!isLocalPlayer)
         {
+            CmdCastleApears();
             Destroy(this);
             return;
         }
+
 
         retornar = true;
         MainCamera = Camera.main;
@@ -59,8 +68,7 @@ public class rock : NetworkBehaviour {
             positionFinal = -12;
         }
 
-
-        }
+    }
 
 
 
@@ -148,17 +156,26 @@ public class rock : NetworkBehaviour {
         isPressed = true;
         //kinematic para que no sea arrastrada por el resorte mientras se esta presionando.
         rockRB.isKinematic = true;
-        //CmdCastleApears();
+        //
 
     }
 
     //Si se suelta la bola.
     private void OnMouseUp()
     {
+        hola();
         isPressed = false;
         rockRB.isKinematic = false;
-        StartCoroutine(Release());
+        //StartCoroutine(Release());
         StartCoroutine(ComeBack());
+    }
+
+
+
+    [Client]
+    void hola()
+    {
+        CmdImprimir(_ID);
     }
 
     //Rutina para soltar el resorte luego de un tiempo.
@@ -167,20 +184,20 @@ public class rock : NetworkBehaviour {
         //Se espera un tiempo.
         yield return new WaitForSeconds(realeseTime);
         //Luego suelta el Spring para que la bola vuele libre.
-        GetComponent<SpringJoint2D>().enabled = false;
+    //GetComponent<SpringJoint2D>().enabled = false;
+        CmdRelease(_ID);
         //Para que no se pueda manipular mas la bola.
-        //this.enabled = false;
+        this.enabled = false;
     }
+    
 
-
-
+    
     //Rutina para soltar el resorte luego de un tiempo.
     IEnumerator ComeBack()
     {
         //Se espera un tiempo.
         yield return new WaitForSeconds(4);
         retornar = true;
-
     }
 
 
@@ -196,4 +213,22 @@ public class rock : NetworkBehaviour {
         GameObject instance = Instantiate(castle) as GameObject;
         NetworkServer.Spawn(instance);
     }
+
+   
+
+
+
+    [Command]
+    void CmdRelease(string _ID)
+    {
+        Debug.Log(_ID);
+        GameObject.Find(_ID).GetComponent<SpringJoint2D>().enabled = false;
+    }
+
+    [Command]
+    void CmdImprimir(string _ID)
+    {
+        Debug.Log(_ID);
+    }
+
 }
